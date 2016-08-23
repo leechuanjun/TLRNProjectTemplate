@@ -38,18 +38,18 @@ export default class NWDLogin extends Component {
 
   componentWillMount() {
     // 读取本地账户数据
-    // nwdStorage.load({
-    //   key: 'loginState',
-    //   autoSync: false,
-    //   syncInBackground: true
-    // }).then(ret => {//如果找到数据，则在then方法中返回
-    //   this.setState({
-    //     telephone: ret.telephone,
-    //     password: ret.password,
-    //   });
-    // }).catch(err => {
-    //   console.warn(err);
-    // });
+    nwdStorage.load({
+      key: 'loginState',
+      autoSync: false,
+      syncInBackground: true
+    }).then(ret => {//如果找到数据，则在then方法中返回
+      this.setState({
+        telephone: ret.telephone,
+        password: ret.password,
+      });
+    }).catch(err => {
+      console.warn(err);
+    });
   }
 
   _login() {

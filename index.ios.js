@@ -13,7 +13,7 @@ import {
 import NWDLandingGuide from './views/App/nwdLandingGuide';
 import NWDTabBar from './views/App/nwdTabBar';
 import NWDStorage from './views/Common/nwdStorage';
-import NWDLogin from './views/App/nwdLogin';
+// import NWDLogin from './views/App/nwdLogin';
 
 class TLRNProjectTemplate extends Component {
   constructor() {
@@ -47,27 +47,27 @@ class TLRNProjectTemplate extends Component {
   componentDidMount() {
     StatusBar.setBarStyle(0);//状态栏为黑色：0； 为白色：1
     // 保存数据
-    nwdStorage.save({
-      key: 'appVersion',
-      rawData: {
-        version: '100',
-      }
-    })
+    // nwdStorage.save({
+    //   key: 'appVersion',
+    //   rawData: {
+    //     version: '100',
+    //   }
+    // })
   }
 
   render() {
     if (this.state.showLandingPage) {
       return (<NWDLandingGuide />);
     } else {
-      return (
-        <Navigator
-          initialRoute = {{name:"login", component: NWDLogin}}
-          renderScene={(route, navigator) => {
-            let Component = route.component;
-            return <Component {...route.params} navigator={navigator} />}
-          }
-        />);
-      // return (<NWDTabBar />);
+      // return (
+      //   <Navigator
+      //     initialRoute = {{name:"login", component: NWDLogin}}
+      //     renderScene={(route, navigator) => {
+      //       let Component = route.component;
+      //       return <Component {...route.params} navigator={navigator} />}
+      //     }
+      //   />);
+      return (<NWDTabBar />);
     }
   }
 }

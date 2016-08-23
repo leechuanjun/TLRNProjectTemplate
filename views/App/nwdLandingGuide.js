@@ -17,12 +17,7 @@ import NWDLandingSwiper from './nwdLandingSwiper';
 export default class NWDLandingGuide extends Component {
   render() {
     return (
-      <Navigator
-        initialRoute = {{name:"landingSwiper", component: NWDLandingSwiper}}
-        renderScene={(route, navigator) => {
-          let Component = route.component;
-          return <Component {...route.params} navigator={navigator} />
-        }} />
+      <NWDLandingSwiper />
     );
   }
 }

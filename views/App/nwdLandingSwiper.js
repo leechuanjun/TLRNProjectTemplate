@@ -17,87 +17,78 @@ import {
 } from 'react-native';
 
 import Swiper from 'react-native-swiper';
-// import Modal from 'react-native-modalbox';
 
 import NWDUtil from '../Common/nwdUtil';
-import NWDLogin from './nwdLogin';
-
+import NWDTabBar from './nwdTabBar';
 
 export default class NWDLandingSwiper extends Component {
-  _navigateToLoginview() {
-    this.props.navigator.push({
-      component: NWDLogin,
-      title: "login",
-      navigationBarHidden: true,
-    });
+  constructor(props) {
+    super(props);
+    this.state = {
+      enterState: false,
+    };
   }
 
-  _navigateToRegisterview() {
-    AlertIOS.alert(
-      '注册',
-      '该功能还没有实现，等待开发中...',
-      [
-        {
-          text: '确定',
-          // onPress: () => console.log('你单击了确定按钮！'),
-        }
-      ]
-    );
+  _enterAppview() {
+    var that = this;
+    setTimeout(function () {
+      that.setState({enterState : true});
+    }, 1);//1毫秒
   }
 
   render() {
+    if (this.state.enterState) {
+      return (<NWDTabBar />);
+    }
+    else {
+      return (
+        <Swiper style={styles.wrapper}
+           paginationStyle={{bottom: 60}}
+          loop={false}>
 
-    return (
-      <Swiper style={styles.wrapper}
-         paginationStyle={{bottom: 60}}
-        loop={false}>
+          <View style={styles.slideSize}>
+            <Image
+              style={styles.introIcon}
+              source={require('../Resource/Intro/pic1.png')}>
+            </Image>
+          </View>
 
-        <View style={styles.slideSize}>
-          <Image
-            style={styles.introIcon}
-            source={require('../Resource/Intro/pic1.png')}>
-          </Image>
-        </View>
+          <View style={styles.slideSize}>
+            <Image
+              style={styles.introIcon}
+              source={require('../Resource/Intro/pic2.png')}>
+            </Image>
+          </View>
 
-        <View style={styles.slideSize}>
-          <Image
-            style={styles.introIcon}
-            source={require('../Resource/Intro/pic2.png')}>
-          </Image>
-        </View>
+          <View style={styles.slideSize}>
+            <Image
+              style={styles.introIcon}
+              source={require('../Resource/Intro/pic3.png')}>
+            </Image>
+          </View>
 
-        <View style={styles.slideSize}>
-          <Image
-            style={styles.introIcon}
-            source={require('../Resource/Intro/pic3.png')}>
-          </Image>
-        </View>
+          <View style={styles.slideSize}>
+            <Image
+              style={styles.introIcon}
+              source={require('../Resource/Intro/pic4.png')}>
+            </Image>
+          </View>
 
-        <View style={styles.slideSize}>
-          <Image
-            style={styles.introIcon}
-            source={require('../Resource/Intro/pic4.png')}>
-          </Image>
-        </View>
-
-        <View style={styles.slideSize}>
-          <Image
-            style={styles.introIconLast}
-            source={require('../Resource/Intro/pic5.png')}>
-          </Image>
-          <View style={styles.buttons}>
-            <View style={styles.leftButton}>
-              <Text style={styles.signInButton} onPress={this._navigateToRegisterview.bind(this)}>注册</Text>
-            </View>
-            <View style={styles.rightButton}>
-              <Text style={styles.loginButton} onPress={this._navigateToLoginview.bind(this)}>登录</Text>
+          <View style={styles.slideSize}>
+            <Image
+              style={styles.introIconLast}
+              source={require('../Resource/Intro/pic5.png')}>
+            </Image>
+            <View style={styles.buttons}>
+              <View style={styles.leftButton}>
+                <Text style={styles.enterAppButton} onPress={this._enterAppview.bind(this)}>开始体验</Text>
+              </View>
             </View>
           </View>
-        </View>
 
-      </Swiper>
-    )
-  }
+        </Swiper>);
+      }
+    }
 };
 
 var styles = StyleSheet.create({
@@ -117,21 +108,12 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
   },
-  signInButton: {
+  enterAppButton: {
     backgroundColor: '#fff',
     padding: 10,
     textAlign: 'center',
-    width: NWDUtil.size.width/2,
+    width: NWDUtil.size.width,
   },
-
-  loginButton: {
-    backgroundColor: '#3B5998',
-    color: '#fff',
-    padding: 10,
-    textAlign: 'center',
-    width: NWDUtil.size.width/2,
-  },
-
   text: {
     color: '#fff',
     fontSize: 22,
